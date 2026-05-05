@@ -1,4 +1,4 @@
-import { FaqItem } from '../shared/faq.component';
+import { FaqItem } from '../shared/faq/faq.component';
 
 export const homeFaqs: FaqItem[] = [
   {

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { homeFaqs } from '../data/faq-content';
-import { FaqComponent } from '../shared/faq.component';
+import { homeFaqs } from '../../data/faq-content';
+import { FaqComponent } from '../../shared/faq/faq.component';
 
 @Component({
   selector: 'app-home',
@@ -116,7 +116,8 @@ import { FaqComponent } from '../shared/faq.component';
       </div>
       <a routerLink="/contact">Request Estimate</a>
     </section>
-  `
+  `,
+  styleUrl: './home.component.scss'
 })
 export class HomeComponent {
   faqs = homeFaqs;

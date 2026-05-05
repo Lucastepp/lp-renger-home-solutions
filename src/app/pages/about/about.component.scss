@@ -1,0 +1,24 @@
+.stats-row {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 28px;
+}
+
+.stats-row span {
+  border-top: 3px solid var(--blue);
+  color: var(--muted);
+  padding-top: 12px;
+}
+
+.stats-row strong {
+  color: var(--ink);
+  display: block;
+  font-size: 1.8rem;
+}
+
+@media (max-width: 640px) {
+  .stats-row {
+    grid-template-columns: 1fr;
+  }
+}

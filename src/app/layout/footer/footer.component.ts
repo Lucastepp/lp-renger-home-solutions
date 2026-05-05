@@ -36,6 +36,7 @@ import { RouterLink } from '@angular/router';
         <p>Serving San Francisco, CA 94110</p>
       </div>
     </footer>
-  `
+  `,
+  styleUrl: './footer.component.scss'
 })
 export class FooterComponent {}

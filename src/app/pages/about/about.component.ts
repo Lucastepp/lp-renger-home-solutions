@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { aboutFaqs } from '../data/faq-content';
-import { FaqComponent } from '../shared/faq.component';
+import { aboutFaqs } from '../../data/faq-content';
+import { FaqComponent } from '../../shared/faq/faq.component';
 
 @Component({
   selector: 'app-about',
@@ -40,7 +40,8 @@ import { FaqComponent } from '../shared/faq.component';
       title="Questions About Renger Home Solutions"
       intro="Helpful answers about the company, the team approach, and what new customers can expect."
     />
-  `
+  `,
+  styleUrl: './about.component.scss'
 })
 export class AboutComponent {
   faqs = aboutFaqs;

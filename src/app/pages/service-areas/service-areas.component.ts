@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { serviceAreaFaqs } from '../data/faq-content';
-import { FaqComponent } from '../shared/faq.component';
+import { serviceAreaFaqs } from '../../data/faq-content';
+import { FaqComponent } from '../../shared/faq/faq.component';
 
 @Component({
   selector: 'app-service-areas',
@@ -53,7 +53,8 @@ import { FaqComponent } from '../shared/faq.component';
       title="Service Area Questions"
       intro="Answers about where Renger Home Solutions works and how homeowners can request service."
     />
-  `
+  `,
+  styleUrl: './service-areas.component.scss'
 })
 export class ServiceAreasComponent {
   faqs = serviceAreaFaqs;

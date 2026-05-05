@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { contactFaqs } from '../data/faq-content';
-import { FaqComponent } from '../shared/faq.component';
+import { contactFaqs } from '../../data/faq-content';
+import { FaqComponent } from '../../shared/faq/faq.component';
 
 @Component({
   selector: 'app-contact',
@@ -59,7 +59,8 @@ import { FaqComponent } from '../shared/faq.component';
       title="Contact & Estimate Questions"
       intro="Quick answers about calling, sending a message, and requesting a free estimate."
     />
-  `
+  `,
+  styleUrl: './contact.component.scss'
 })
 export class ContactComponent {
   submitted = false;

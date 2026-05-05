@@ -30,7 +30,8 @@ export interface FaqItem {
         }
       </div>
     </section>
-  `
+  `,
+  styleUrl: './faq.component.scss'
 })
 export class FaqComponent {
   @Input({ required: true }) items: FaqItem[] = [];

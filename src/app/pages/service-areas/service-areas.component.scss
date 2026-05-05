@@ -1,0 +1,101 @@
+.area-card-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.area-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 12px 28px rgba(12, 20, 40, 0.08);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.area-card img {
+  aspect-ratio: 1.35;
+  object-fit: cover;
+  width: 100%;
+}
+
+.area-card div {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 22px;
+}
+
+.area-card span {
+  color: var(--blue);
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.area-card h3 {
+  font-size: 1.35rem;
+  margin-bottom: 10px;
+}
+
+.area-card p {
+  color: #31405b;
+  font-size: 0.96rem;
+  line-height: 1.65;
+}
+
+.area-card a {
+  border: 1px solid var(--ink);
+  border-radius: 6px;
+  display: inline-block;
+  font-weight: 800;
+  margin-top: auto;
+  padding: 11px 14px;
+  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+  width: fit-content;
+}
+
+.area-card a:hover,
+.area-card a:focus-visible {
+  background: var(--ink);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.map-panel {
+  background: linear-gradient(135deg, rgba(47, 125, 246, 0.78), rgba(31, 208, 255, 0.5)), url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80');
+  background-position: center;
+  background-size: cover;
+  border-radius: 8px;
+  margin-top: 42px;
+  min-height: 390px;
+  padding: 18px;
+}
+
+.map-panel div {
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+  max-width: 320px;
+  padding: 20px;
+}
+
+.map-panel a {
+  color: var(--blue);
+  font-weight: 800;
+}
+
+@media (max-width: 980px) {
+  .area-card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .area-card-grid {
+    grid-template-columns: 1fr;
+  }
+}
