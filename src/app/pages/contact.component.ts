@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { contactFaqs } from '../data/faq-content';
+import { FaqComponent } from '../shared/faq.component';
+
 @Component({
   selector: 'app-contact',
-  imports: [FormsModule],
+  imports: [FaqComponent, FormsModule],
   template: `
     <section class="page-hero contact-hero">
       <div>
@@ -50,10 +53,18 @@ import { FormsModule } from '@angular/forms';
         }
       </form>
     </section>
+
+    <app-faq
+      [items]="faqs"
+      title="Contact & Estimate Questions"
+      intro="Quick answers about calling, sending a message, and requesting a free estimate."
+    />
   `
 })
 export class ContactComponent {
   submitted = false;
+  faqs = contactFaqs;
+
   form = {
     firstName: '',
     lastName: '',

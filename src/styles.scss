@@ -78,7 +78,9 @@ textarea {
 .site-header .brand {
   background: #fff;
   border-radius: 6px;
-  padding: 6px 10px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
+  min-height: 46px;
+  padding: 3px 8px;
 }
 
 .brand {
@@ -93,8 +95,8 @@ textarea {
 }
 
 .brand-logo-full {
-  height: 46px;
-  width: 216px;
+  height: 55px;
+  width: 180px;
 }
 
 .brand-logo-icon {
@@ -295,6 +297,11 @@ p {
   font-weight: 800;
 }
 
+.blue-note {
+  display: block;
+  margin-bottom: 12px;
+}
+
 .eyebrow {
   border: 1px solid #9faac0;
   border-radius: 999px;
@@ -357,6 +364,28 @@ p {
   padding: 11px 16px;
 }
 
+.section-action {
+  display: flex;
+  justify-content: center;
+  margin-top: 44px;
+}
+
+.section-action.tight {
+  margin-top: 34px;
+}
+
+.secondary-action {
+  align-items: center;
+  background: var(--blue);
+  border-radius: 6px;
+  color: #fff;
+  display: inline-flex;
+  font-weight: 800;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 26px;
+}
+
 .split {
   align-items: center;
   display: grid;
@@ -389,42 +418,88 @@ p {
   position: absolute;
 }
 
-.check-badge {
-  align-items: center;
-  background: var(--blue);
-  border-radius: 999px;
-  color: #fff;
-  display: inline-flex;
-  font-size: 1.4rem;
-  height: 54px;
-  justify-content: center;
-  margin-bottom: 20px;
-  width: 54px;
-}
-
 .faq {
   max-width: 900px;
 }
 
-details {
+.faq-list {
+  display: grid;
+  gap: 0;
+}
+
+.faq-item {
   border-bottom: 1px solid var(--line);
-  padding: 24px 0;
 }
 
-summary {
+.faq-item button {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: var(--ink);
   cursor: pointer;
+  display: flex;
+  gap: 24px;
   font-weight: 800;
-  list-style: none;
+  justify-content: space-between;
+  padding: 24px 0;
+  text-align: left;
+  width: 100%;
 }
 
-summary::after {
-  content: '+';
-  float: right;
-  font-size: 1.5rem;
+.faq-icon {
+  flex: 0 0 auto;
+  height: 18px;
+  position: relative;
+  width: 18px;
 }
 
-details[open] summary::after {
-  content: '-';
+.faq-icon::before,
+.faq-icon::after {
+  background: var(--ink);
+  content: '';
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.faq-icon::before {
+  height: 2px;
+  width: 18px;
+}
+
+.faq-icon::after {
+  height: 18px;
+  width: 2px;
+}
+
+.faq-item.open .faq-icon::after {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 240ms ease;
+}
+
+.faq-answer > p {
+  color: #31405b;
+  line-height: 1.7;
+  margin: 0;
+  overflow: hidden;
+  padding-right: 52px;
+}
+
+.faq-item.open .faq-answer {
+  grid-template-rows: 1fr;
+}
+
+.faq-item.open .faq-answer > p {
+  padding-bottom: 24px;
+  padding-top: 2px;
 }
 
 .cta-band {
@@ -490,6 +565,59 @@ details[open] summary::after {
   border-radius: 8px;
   font-weight: 800;
   padding: 18px;
+}
+
+.area-card-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.area-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 12px 28px rgba(12, 20, 40, 0.08);
+  overflow: hidden;
+}
+
+.area-card img {
+  aspect-ratio: 1.35;
+  object-fit: cover;
+  width: 100%;
+}
+
+.area-card div {
+  padding: 22px;
+}
+
+.area-card span {
+  color: var(--blue);
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.area-card h3 {
+  font-size: 1.35rem;
+  margin-bottom: 10px;
+}
+
+.area-card p {
+  color: #31405b;
+  font-size: 0.96rem;
+  line-height: 1.65;
+}
+
+.area-card a {
+  border: 1px solid var(--ink);
+  border-radius: 6px;
+  display: inline-block;
+  font-weight: 800;
+  margin-top: 8px;
+  padding: 11px 14px;
 }
 
 .map-panel {
@@ -653,7 +781,8 @@ textarea {
   }
 
   .card-grid,
-  .location-grid {
+  .location-grid,
+  .area-card-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -693,6 +822,7 @@ textarea {
   .choice-grid,
   .card-grid,
   .location-grid,
+  .area-card-grid,
   .stats-row,
   .contact-form {
     grid-template-columns: 1fr;
@@ -709,4 +839,3 @@ textarea {
     padding: 28px;
   }
 }
-

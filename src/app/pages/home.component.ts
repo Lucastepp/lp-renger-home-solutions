@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+import { homeFaqs } from '../data/faq-content';
+import { FaqComponent } from '../shared/faq.component';
+
 @Component({
   selector: 'app-home',
-  imports: [RouterLink],
+  imports: [FaqComponent, RouterLink],
   template: `
     <section class="hero">
       <div class="hero-overlay"></div>
@@ -65,6 +68,10 @@ import { RouterLink } from '@angular/router';
           </article>
         }
       </div>
+
+      <div class="section-action">
+        <a class="secondary-action" routerLink="/contact">Get a Fast Estimate</a>
+      </div>
     </section>
 
     <section class="section split">
@@ -80,32 +87,27 @@ import { RouterLink } from '@angular/router';
       <img class="feature-image" src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1100&q=80" alt="Updated Bay Area style home interior" />
     </section>
 
-    <section class="section split reverse">
-      <img class="feature-image" src="https://images.unsplash.com/photo-1598228723793-52759bba239c?auto=format&fit=crop&w=1100&q=80" alt="Residential home exterior repair project" />
-      <div>
-        <span class="check-badge">&#10003;</span>
-        <h2>One Crew for the Home Projects You Keep Putting Off</h2>
-        <div class="check-list">
-          <p><strong>Fewer handoffs.</strong> A single point of contact makes estimates, scheduling, and progress easier to follow.</p>
-          <p><strong>Better finish quality.</strong> Small details like trim, caulking, patching, and paint matching are treated as part of the job.</p>
-          <p><strong>CTA-friendly landing flow.</strong> Every section gives the homeowner a clear next step: call or request an estimate.</p>
+    <section class="section">
+      <div class="split reverse">
+        <img class="feature-image" src="https://images.unsplash.com/photo-1598228723793-52759bba239c?auto=format&fit=crop&w=1100&q=80" alt="Residential home exterior repair project" />
+        <div>
+          <h2>One Crew for the Home Projects You Keep Putting Off</h2>
+          <div class="check-list">
+            <p><strong>Fewer handoffs.</strong> A single point of contact makes estimates, scheduling, and progress easier to follow.</p>
+            <p><strong>Better finish quality.</strong> Small details like trim, caulking, patching, and paint matching are treated as part of the job.</p>
+            <p><strong>CTA-friendly landing flow.</strong> Every section gives the homeowner a clear next step: call or request an estimate.</p>
+          </div>
         </div>
+      </div>
+      <div class="section-action tight">
+        <a class="secondary-action" routerLink="/contact">Get a Fast Estimate</a>
       </div>
     </section>
 
-    <section class="section faq">
-      <div class="section-heading">
-        <span class="eyebrow">FAQ</span>
-        <h2>Frequently Asked Questions</h2>
-        <p>Quick answers for homeowners comparing contractors in San Francisco and the Bay Area.</p>
-      </div>
-      @for (item of faqs; track item.q) {
-        <details>
-          <summary>{{ item.q }}</summary>
-          <p>{{ item.a }}</p>
-        </details>
-      }
-    </section>
+    <app-faq
+      [items]="faqs"
+      intro="General answers for homeowners comparing contractors in San Francisco and the Bay Area."
+    />
 
     <section class="section cta-band">
       <div>
@@ -117,6 +119,8 @@ import { RouterLink } from '@angular/router';
   `
 })
 export class HomeComponent {
+  faqs = homeFaqs;
+
   services = [
     {
       title: 'Roof & Exterior Repairs',
@@ -135,21 +139,6 @@ export class HomeComponent {
       text: 'Patch, texture, paint, baseboards, trim, laminate, vinyl, and finish repairs after leaks or everyday wear.',
       image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=900&q=80',
       alt: 'Home painting and drywall renovation tools'
-    }
-  ];
-
-  faqs = [
-    {
-      q: 'What should I look for in a home improvement contractor in San Francisco, CA?',
-      a: 'Look for clear estimates, insurance, local experience, references, and a crew that communicates schedule changes before they become surprises.'
-    },
-    {
-      q: 'Can Renger Home Solutions handle small repairs and larger remodels?',
-      a: 'Yes. This draft positions the company for both quick fixes and larger residential projects, which gives the landing page more CTA opportunities.'
-    },
-    {
-      q: 'How do I get started with a project estimate?',
-      a: 'Call the number on the page or submit the contact form with photos, location, and a short project description.'
     }
   ];
 }

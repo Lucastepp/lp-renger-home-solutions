@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+import { aboutFaqs } from '../data/faq-content';
+import { FaqComponent } from '../shared/faq.component';
+
 @Component({
   selector: 'app-about',
-  imports: [RouterLink],
+  imports: [FaqComponent, RouterLink],
   template: `
     <section class="page-hero about-hero">
       <div>
@@ -31,6 +34,14 @@ import { RouterLink } from '@angular/router';
       </div>
       <img class="feature-image" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1100&q=80" alt="Contractor reviewing home improvement plans" />
     </section>
+
+    <app-faq
+      [items]="faqs"
+      title="Questions About Renger Home Solutions"
+      intro="Helpful answers about the company, the team approach, and what new customers can expect."
+    />
   `
 })
-export class AboutComponent {}
+export class AboutComponent {
+  faqs = aboutFaqs;
+}
