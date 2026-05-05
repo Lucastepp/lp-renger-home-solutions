@@ -83,7 +83,7 @@ import { RouterLink } from '@angular/router';
     <section class="section split reverse">
       <img class="feature-image" src="https://images.unsplash.com/photo-1598228723793-52759bba239c?auto=format&fit=crop&w=1100&q=80" alt="Residential home exterior repair project" />
       <div>
-        <span class="check-badge">✓</span>
+        <span class="check-badge">&#10003;</span>
         <h2>One Crew for the Home Projects You Keep Putting Off</h2>
         <div class="check-list">
           <p><strong>Fewer handoffs.</strong> A single point of contact makes estimates, scheduling, and progress easier to follow.</p>
