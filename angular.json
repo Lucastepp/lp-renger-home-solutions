@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "ranger-home-solutions": {
+    "renger-home-solutions": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -61,10 +61,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ranger-home-solutions:build:production"
+              "buildTarget": "renger-home-solutions:build:production"
             },
             "development": {
-              "buildTarget": "ranger-home-solutions:build:development"
+              "buildTarget": "renger-home-solutions:build:development"
             }
           },
           "defaultConfiguration": "development"
