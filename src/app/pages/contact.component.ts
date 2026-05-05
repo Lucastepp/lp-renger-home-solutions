@@ -16,9 +16,9 @@ import { FormsModule } from '@angular/forms';
     <section class="section contact-layout">
       <aside class="contact-card">
         <h2>Contact Information</h2>
-        <p>Thank you for considering Ranger Home Solutions. We will get back to you during normal business hours.</p>
+        <p>Thank you for considering Renger Home Solutions. We will get back to you during normal business hours.</p>
         <a href="tel:+14155550198">(415) 555-0198</a>
-        <a href="mailto:hello@rangerhomesolutions.com">hello@rangerhomesolutions.com</a>
+        <a href="mailto:hello@rengerhomesolutions.com">hello@rengerhomesolutions.com</a>
         <span>San Francisco, CA 94110</span>
       </aside>
 

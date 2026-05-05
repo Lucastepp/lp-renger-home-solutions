@@ -7,10 +7,10 @@ import { RouterLink } from '@angular/router';
   template: `
     <section class="page-hero about-hero">
       <div>
-        <span class="eyebrow">About Ranger</span>
+        <span class="eyebrow">About Renger</span>
         <h1>Dependable Home Improvement Help for Bay Area Homeowners</h1>
         <p>
-          Ranger Home Solutions is built around a simple promise: show up prepared, communicate clearly, and leave the home better than we found it.
+          Renger Home Solutions is built around a simple promise: show up prepared, communicate clearly, and leave the home better than we found it.
         </p>
         <a class="primary-action compact" routerLink="/contact">Talk to a Project Lead</a>
       </div>

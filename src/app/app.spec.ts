@@ -20,7 +20,6 @@ describe('App', () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.textContent).toContain('Ranger');
-    expect(compiled.textContent).toContain('Home Solutions');
+    expect(compiled.querySelector('.brand-logo')?.getAttribute('alt')).toBe('Renger Home Solutions');
   });
 });

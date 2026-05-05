@@ -1,4 +1,4 @@
-# Ranger Home Solutions
+# Renger Home Solutions
 
 Angular landing page for a San Francisco and Bay Area home improvement contractor.
 

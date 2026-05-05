@@ -15,7 +15,7 @@ import { RouterLink } from '@angular/router';
           </div>
           <h1>Reliable Home Improvement Contractors in San Francisco, CA</h1>
           <p>
-            Ranger Home Solutions helps Bay Area homeowners handle repairs, remodels, roofing, painting, drywall, flooring,
+            Renger Home Solutions helps Bay Area homeowners handle repairs, remodels, roofing, painting, drywall, flooring,
             and punch-list projects with clean communication and dependable workmanship.
           </p>
           <div class="pill-row">
@@ -70,7 +70,7 @@ import { RouterLink } from '@angular/router';
     <section class="section split">
       <div>
         <span class="blue-note">Local experience, practical scheduling, responsive service.</span>
-        <h2>Why Choose Ranger Home Solutions in San Francisco?</h2>
+        <h2>Why Choose Renger Home Solutions in San Francisco?</h2>
         <div class="check-list">
           <p><strong>Full-service home repair support.</strong> We handle the details homeowners often struggle to coordinate across multiple trades.</p>
           <p><strong>Bay Area property knowledge.</strong> We understand older homes, tight lots, weather exposure, and busy neighborhood access.</p>
@@ -144,7 +144,7 @@ export class HomeComponent {
       a: 'Look for clear estimates, insurance, local experience, references, and a crew that communicates schedule changes before they become surprises.'
     },
     {
-      q: 'Can Ranger Home Solutions handle small repairs and larger remodels?',
+      q: 'Can Renger Home Solutions handle small repairs and larger remodels?',
       a: 'Yes. This draft positions the company for both quick fixes and larger residential projects, which gives the landing page more CTA opportunities.'
     },
     {

@@ -11,12 +11,9 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
     </div>
 
     <header class="site-header">
-      <a class="brand" routerLink="/" aria-label="Ranger Home Solutions home">
-        <span class="brand-mark">R</span>
-        <span>
-          <strong>Ranger</strong>
-          <small>Home Solutions</small>
-        </span>
+      <a class="brand" routerLink="/" aria-label="Renger Home Solutions home">
+        <img class="brand-logo brand-logo-full" src="/assets/brand/renger-logo-horizontal.png" alt="Renger Home Solutions" />
+        <img class="brand-logo brand-logo-icon" src="/assets/brand/renger-logo-icon.png" alt="Renger Home Solutions" />
       </a>
 
       <nav aria-label="Main navigation">
@@ -36,11 +33,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
     <footer class="site-footer">
       <div>
         <a class="brand footer-brand" routerLink="/">
-          <span class="brand-mark">R</span>
-          <span>
-            <strong>Ranger</strong>
-            <small>Home Solutions</small>
-          </span>
+          <img class="brand-logo footer-logo" src="/assets/brand/renger-logo-horizontal.png" alt="Renger Home Solutions" />
         </a>
         <p>Residential remodeling, repairs, roofing, painting, drywall, flooring, and handyman work across San Francisco and the Bay Area.</p>
       </div>
@@ -64,7 +57,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
       <div>
         <h3>Contact</h3>
         <a href="tel:+14155550198">(415) 555-0198</a>
-        <a href="mailto:hello@rangerhomesolutions.com">hello@rangerhomesolutions.com</a>
+        <a href="mailto:hello@rengerhomesolutions.com">hello@rengerhomesolutions.com</a>
         <p>Serving San Francisco, CA 94110</p>
       </div>
     </footer>

@@ -6,9 +6,9 @@ import { HomeComponent } from './pages/home.component';
 import { ServiceAreasComponent } from './pages/service-areas.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent, title: 'Ranger Home Solutions | San Francisco Home Improvement' },
-  { path: 'about', component: AboutComponent, title: 'About Ranger Home Solutions' },
+  { path: '', component: HomeComponent, title: 'Renger Home Solutions | San Francisco Home Improvement' },
+  { path: 'about', component: AboutComponent, title: 'About Renger Home Solutions' },
   { path: 'service-areas', component: ServiceAreasComponent, title: 'San Francisco & Bay Area Service Areas' },
-  { path: 'contact', component: ContactComponent, title: 'Contact Ranger Home Solutions' },
+  { path: 'contact', component: ContactComponent, title: 'Contact Renger Home Solutions' },
   { path: '**', redirectTo: '' }
 ];

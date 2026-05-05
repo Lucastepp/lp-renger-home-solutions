@@ -10,7 +10,7 @@ import { RouterLink } from '@angular/router';
         <span class="eyebrow">Find Us</span>
         <h1>Home Improvement Services Across San Francisco & the Bay Area</h1>
         <p>
-          Location-focused content helps homeowners find Ranger Home Solutions when searching for nearby remodeling, repair, and handyman services.
+          Location-focused content helps homeowners find Renger Home Solutions when searching for nearby remodeling, repair, and handyman services.
         </p>
       </div>
     </section>
@@ -30,7 +30,7 @@ import { RouterLink } from '@angular/router';
 
       <div class="map-panel">
         <div>
-          <h3>Ranger Home Solutions</h3>
+          <h3>Renger Home Solutions</h3>
           <p>San Francisco, CA 94110</p>
           <a href="https://www.google.com/maps/search/?api=1&query=San%20Francisco%20CA" target="_blank" rel="noreferrer">Open in Maps</a>
         </div>
