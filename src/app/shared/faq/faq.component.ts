@@ -7,30 +7,7 @@ export interface FaqItem {
 
 @Component({
   selector: 'app-faq',
-  template: `
-    <section class="section faq">
-      <div class="section-heading">
-        <span class="eyebrow">{{ eyebrow }}</span>
-        <h2>{{ title }}</h2>
-        <p>{{ intro }}</p>
-      </div>
-
-      <div class="faq-list">
-        @for (item of items; track item.question; let index = $index) {
-          <article class="faq-item" [class.open]="isOpen(index)">
-            <button type="button" (click)="toggle(index)" [attr.aria-expanded]="isOpen(index)" [attr.aria-controls]="'faq-panel-' + index">
-              <span>{{ item.question }}</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-
-            <div class="faq-answer" [id]="'faq-panel-' + index">
-              <p>{{ item.answer }}</p>
-            </div>
-          </article>
-        }
-      </div>
-    </section>
-  `,
+  templateUrl: './faq.component.html',
   styleUrl: './faq.component.scss'
 })
 export class FaqComponent {

@@ -7,53 +7,7 @@ import { FaqComponent } from '../../shared/faq/faq.component';
 @Component({
   selector: 'app-service-areas',
   imports: [FaqComponent, RouterLink],
-  template: `
-    <section class="page-hero locations-hero">
-      <div>
-        <span class="eyebrow">Find Us</span>
-        <h1>Home Improvement Services Across San Francisco & the Bay Area</h1>
-        <p>
-          Location-focused content helps homeowners find Renger Home Solutions when searching for nearby remodeling, repair, and handyman services.
-        </p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-heading">
-        <span class="eyebrow">Service Area</span>
-        <h2>Bay Area Communities We Serve</h2>
-        <p>Six key service areas for homeowners looking for remodeling, repairs, roofing, painting, drywall, flooring, and general home improvement help.</p>
-      </div>
-
-      <div class="area-card-grid">
-        @for (area of areas; track area.name) {
-          <article class="area-card">
-            <img [src]="area.image" [alt]="area.alt" />
-            <div>
-              <span>{{ area.label }}</span>
-              <h3>{{ area.name }}</h3>
-              <p>{{ area.text }}</p>
-              <a routerLink="/contact">Request service in {{ area.name }}</a>
-            </div>
-          </article>
-        }
-      </div>
-
-      <div class="map-panel">
-        <div>
-          <h3>Renger Home Solutions</h3>
-          <p>San Francisco, CA 94110</p>
-          <a href="https://www.google.com/maps/search/?api=1&query=San%20Francisco%20CA" target="_blank" rel="noreferrer">Open in Maps</a>
-        </div>
-      </div>
-    </section>
-
-    <app-faq
-      [items]="faqs"
-      title="Service Area Questions"
-      intro="Answers about where Renger Home Solutions works and how homeowners can request service."
-    />
-  `,
+  templateUrl: './service-areas.component.html',
   styleUrl: './service-areas.component.scss'
 })
 export class ServiceAreasComponent {
