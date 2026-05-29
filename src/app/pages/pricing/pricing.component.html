@@ -31,11 +31,14 @@
             </div>
             <strong>{{ group.featuredPrice }}</strong>
           </div>
-          <ul>
-            @for (item of group.items; track item) {
-              <li>{{ item }}</li>
+          <div class="pricing-items">
+            @for (item of group.items; track item.name) {
+              <div class="pricing-item">
+                <span>{{ item.name }}</span>
+                <strong>{{ item.price }}</strong>
+              </div>
             }
-          </ul>
+          </div>
         </article>
       }
     </div>
