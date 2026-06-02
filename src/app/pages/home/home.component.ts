@@ -18,7 +18,6 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   locations = [
     'San Francisco, CA',
     'Millbrae',
-    'South San Francisco',
     'Pacifica',
     'San Mateo',
     'Daly City'
@@ -26,10 +25,12 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   activeLocation = signal(this.locations[0]);
   locationVisible = signal(true);
   private locationIndex = 0;
-  private locationInterval?: ReturnType<typeof setInterval>;
+  private locationRotationTimer?: ReturnType<typeof setTimeout>;
   private locationSwapTimer?: ReturnType<typeof setTimeout>;
   private pricingInterval?: ReturnType<typeof setInterval>;
   private pricingSwapTimer?: ReturnType<typeof setTimeout>;
+  private estimateHeadingInterval?: ReturnType<typeof setInterval>;
+  private estimateHeadingSwapTimer?: ReturnType<typeof setTimeout>;
   private serviceCardObserver?: IntersectionObserver;
 
   faqs = homeFaqs;
@@ -83,20 +84,20 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   pricingPreview = signal(this.pricingPreviewSlides[0]);
   pricingVisible = signal(true);
   private pricingSlideIndex = 0;
+  estimateHeadings = [
+    'Ready for a faster home repair estimate?',
+    'Request your estimate today.'
+  ];
+  estimateHeading = signal(this.estimateHeadings[0]);
+  estimateHeadingVisible = signal(true);
+  private estimateHeadingIndex = 0;
 
   constructor() {
     if (
       typeof window !== 'undefined' &&
       !window.matchMedia('(prefers-reduced-motion: reduce)').matches
     ) {
-      this.locationInterval = setInterval(() => {
-        this.locationVisible.set(false);
-        this.locationSwapTimer = setTimeout(() => {
-          this.locationIndex = (this.locationIndex + 1) % this.locations.length;
-          this.activeLocation.set(this.locations[this.locationIndex]);
-          this.locationVisible.set(true);
-        }, 180);
-      }, 2800);
+      this.scheduleLocationRotation();
 
       this.pricingInterval = setInterval(() => {
         this.pricingVisible.set(false);
@@ -106,6 +107,15 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
           this.pricingVisible.set(true);
         }, 520);
       }, 6200);
+
+      this.estimateHeadingInterval = setInterval(() => {
+        this.estimateHeadingVisible.set(false);
+        this.estimateHeadingSwapTimer = setTimeout(() => {
+          this.estimateHeadingIndex = (this.estimateHeadingIndex + 1) % this.estimateHeadings.length;
+          this.estimateHeading.set(this.estimateHeadings[this.estimateHeadingIndex]);
+          this.estimateHeadingVisible.set(true);
+        }, 420);
+      }, 7200);
     }
   }
 
@@ -137,8 +147,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.locationInterval) {
-      clearInterval(this.locationInterval);
+    if (this.locationRotationTimer) {
+      clearTimeout(this.locationRotationTimer);
     }
 
     if (this.locationSwapTimer) {
@@ -153,10 +163,32 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       clearTimeout(this.pricingSwapTimer);
     }
 
+    if (this.estimateHeadingInterval) {
+      clearInterval(this.estimateHeadingInterval);
+    }
+
+    if (this.estimateHeadingSwapTimer) {
+      clearTimeout(this.estimateHeadingSwapTimer);
+    }
+
     this.serviceCardObserver?.disconnect();
   }
 
   private revealAllServiceCards() {
     this.serviceCards.forEach((card) => card.nativeElement.classList.add('revealed'));
+  }
+
+  private scheduleLocationRotation() {
+    const displayTime = this.locationIndex === 0 ? 5200 : 3000;
+
+    this.locationRotationTimer = setTimeout(() => {
+      this.locationVisible.set(false);
+      this.locationSwapTimer = setTimeout(() => {
+        this.locationIndex = (this.locationIndex + 1) % this.locations.length;
+        this.activeLocation.set(this.locations[this.locationIndex]);
+        this.locationVisible.set(true);
+        this.scheduleLocationRotation();
+      }, 180);
+    }, displayTime);
   }
 }

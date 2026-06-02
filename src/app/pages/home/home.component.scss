@@ -3,7 +3,7 @@
   background-position: center;
   background-size: cover;
   color: #fff;
-  min-height: min(620px, 64vh);
+  min-height: min(720px, 72vh);
   position: relative;
 }
 
@@ -18,7 +18,7 @@
   display: grid;
   gap: clamp(44px, 5vw, 84px);
   grid-template-columns: minmax(0, 1fr) minmax(340px, 420px);
-  min-height: min(620px, 64vh);
+  min-height: min(720px, 72vh);
   position: relative;
   z-index: 1;
 }
@@ -34,6 +34,10 @@
   gap: 14px;
 }
 
+.trust-row {
+  margin-bottom: 30px;
+}
+
 .trust-row span {
   color: #e8efff;
   font-size: 0.86rem;
@@ -43,9 +47,14 @@
 
 .hero h1 {
   font-size: clamp(2.7rem, 4.4vw, 4.65rem);
+  font-weight: 700;
   line-height: 1.02;
-  margin: 24px 0;
+  margin: 0 0 30px;
   max-width: 840px;
+}
+
+.keep-together {
+  white-space: nowrap;
 }
 
 .rotating-location {
@@ -54,13 +63,11 @@
   min-height: 1.04em;
   opacity: 0;
   text-shadow: 0 0 22px rgba(83, 148, 255, 0.28);
-  transform: translateY(10px);
-  transition: opacity 180ms ease, transform 180ms ease;
+  transition: opacity 280ms ease;
 }
 
 .rotating-location.visible {
   opacity: 1;
-  transform: translateY(0);
 }
 
 .sr-only {
@@ -79,6 +86,7 @@
   color: #e4e9f6;
   font-size: 1.08rem;
   line-height: 1.7;
+  margin-bottom: 28px;
   max-width: 680px;
 }
 
@@ -233,6 +241,21 @@
   margin-bottom: 0;
 }
 
+.estimate-heading {
+  color: #fff;
+  min-height: 1.16em;
+  opacity: 0;
+  text-shadow: 0 0 0 rgba(90, 192, 255, 0);
+  transform: translateY(8px);
+  transition: opacity 420ms ease, text-shadow 420ms ease, transform 420ms ease;
+}
+
+.estimate-heading.visible {
+  opacity: 1;
+  text-shadow: 0 0 18px rgba(90, 192, 255, 0.58);
+  transform: translateY(0);
+}
+
 .cta-band a {
   align-items: center;
   background: var(--blue);
@@ -245,6 +268,27 @@
   min-height: 50px;
   padding: 0 24px;
   transition: background 180ms ease, color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.cta-band-action {
+  animation: estimate-cta-pulse 4.8s ease-in-out infinite;
+  overflow: hidden;
+  position: relative;
+}
+
+.cta-band-action::after {
+  background: linear-gradient(105deg, transparent 20%, rgba(255, 255, 255, 0.66) 50%, transparent 80%);
+  content: '';
+  inset: 0;
+  position: absolute;
+  transform: translateX(-145%);
+  width: 64%;
+}
+
+.cta-band-action:hover::after,
+.cta-band-action:focus-visible::after {
+  transform: translateX(235%);
+  transition: transform 620ms ease;
 }
 
 .cta-band a:hover,
@@ -296,10 +340,25 @@
 }
 
 .pricing-cta {
-  animation: pricing-cta-pulse 5.2s ease-in-out infinite;
+  animation: pricing-cta-pulse 4.6s ease-in-out infinite;
   gap: 10px;
   overflow: hidden;
   position: relative;
+}
+
+.pricing-cta::after {
+  background: linear-gradient(105deg, transparent 20%, rgba(255, 255, 255, 0.72) 50%, transparent 80%);
+  content: '';
+  inset: 0;
+  position: absolute;
+  transform: translateX(-145%);
+  width: 64%;
+}
+
+.pricing-cta:hover::after,
+.pricing-cta:focus-visible::after {
+  transform: translateX(235%);
+  transition: transform 620ms ease;
 }
 
 .pricing-cta span {
@@ -322,7 +381,19 @@
   }
 
   84% {
-    box-shadow: 0 0 0 7px rgba(47, 125, 246, 0.16);
+    box-shadow: 0 0 0 9px rgba(47, 125, 246, 0.24), 0 10px 24px rgba(47, 125, 246, 0.28);
+  }
+}
+
+@keyframes estimate-cta-pulse {
+  0%,
+  74%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(90, 192, 255, 0);
+  }
+
+  84% {
+    box-shadow: 0 0 0 9px rgba(90, 192, 255, 0.24), 0 12px 28px rgba(47, 125, 246, 0.28);
   }
 }
 
@@ -410,17 +481,25 @@
 @media (max-width: 640px) {
   .hero h1 {
     font-size: 2.15rem;
-    line-height: 1.06;
-    margin: 20px 0;
+    line-height: 1.05;
+    margin: 18px 0;
   }
 
   .rotating-location {
-    min-height: 2.12em;
+    min-height: 1.04em;
   }
 
   .hero,
   .hero-content {
     min-height: auto;
+  }
+
+  .trust-row {
+    margin-bottom: 0;
+  }
+
+  .hero p {
+    margin-bottom: 16px;
   }
 
   .hero-content {
@@ -435,7 +514,7 @@
   }
 
   .trust-row span {
-    font-size: 0.74rem;
+    font-size: 0.69rem;
   }
 
   .pill-row span {
@@ -458,6 +537,10 @@
     flex-direction: column;
     gap: 24px;
   }
+
+  .estimate-heading {
+    min-height: 3.32em;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -477,5 +560,21 @@
 
   .pricing-cta {
     animation: none;
+  }
+
+  .estimate-heading {
+    opacity: 1;
+    text-shadow: none;
+    transform: none;
+    transition: none;
+  }
+
+  .cta-band-action {
+    animation: none;
+  }
+
+  .pricing-cta::after,
+  .cta-band-action::after {
+    display: none;
   }
 }

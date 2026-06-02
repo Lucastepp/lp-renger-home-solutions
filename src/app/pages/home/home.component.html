@@ -7,8 +7,12 @@
             <span>Property maintenance expert</span>
           </div>
           <h1>
-            Reliable Home Improvement Help in
-            <span class="rotating-location" [class.visible]="locationVisible()" aria-hidden="true">{{ activeLocation() }}</span>
+            Reliable Home Improvement <span class="keep-together">Help in</span>
+            <span
+              class="rotating-location"
+              [class.visible]="locationVisible()"
+              aria-hidden="true"
+            >{{ activeLocation() }}</span>
             <span class="sr-only">San Francisco and nearby Bay Area communities</span>
           </h1>
           <p>
@@ -144,8 +148,9 @@
 
     <section class="section cta-band">
       <div>
-        <h2>Ready for a faster home repair estimate?</h2>
+        <h2 class="estimate-heading" [class.visible]="estimateHeadingVisible()" aria-hidden="true">{{ estimateHeading() }}</h2>
+        <span class="sr-only">Ready for a faster home repair estimate? Request your estimate today.</span>
         <p>Call now or send a few project details. We will follow up during normal business hours.</p>
       </div>
-      <a routerLink="/contact">Request Estimate</a>
+      <a class="cta-band-action" routerLink="/contact">Request Estimate</a>
     </section>
