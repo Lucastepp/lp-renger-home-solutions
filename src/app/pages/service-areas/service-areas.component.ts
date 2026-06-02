@@ -27,8 +27,8 @@ export class ServiceAreasComponent {
       name: 'Daly City',
       label: 'Peninsula north',
       text: 'Practical home improvement support for Daly City homeowners, from small repairs to larger residential upgrades.',
-      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/City_of_Daly_City.jpg?width=900',
-      alt: 'Daly City hillside neighborhood'
+      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Fog_over_Daly_City%2C_September_2018.JPG?width=900',
+      alt: 'Fog over a residential neighborhood in Daly City'
     },
     {
       name: 'Pacifica',
@@ -48,8 +48,8 @@ export class ServiceAreasComponent {
       name: 'San Bruno',
       label: 'Peninsula north',
       text: 'Small-to-medium repairs, drywall, paint, assembly, and property maintenance for San Bruno homes.',
-      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Aerial_photo_of_San_Bruno%2C_Colma%2C_Millbrae%2C_SFO_Airport.jpg?width=900',
-      alt: 'Aerial view of San Bruno and nearby Peninsula communities'
+      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/SanBruno.jpg?width=900',
+      alt: 'Panorama of San Bruno looking toward San Francisco Bay'
     },
     {
       name: 'Burlingame',
@@ -83,8 +83,8 @@ export class ServiceAreasComponent {
       name: 'Woodside',
       label: 'Peninsula foothills',
       text: 'Maintenance, careful repairs, flooring details, and exterior fixes for Woodside properties.',
-      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Historic_photo_of_Woodside%2C_California_%281965%29.jpg?width=900',
-      alt: 'Historic Woodside, California'
+      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Woodside_Store%2C_471_Kings_Mountain_Rd.%2C_Woodside%2C_CA_9-18-2011_5-31-47_PM.JPG?width=900',
+      alt: 'Historic Woodside Store in Woodside'
     },
     {
       name: 'Palo Alto',
@@ -104,8 +104,8 @@ export class ServiceAreasComponent {
       name: 'Sunnyvale',
       label: 'South Bay access',
       text: 'Practical home fixes, drywall repairs, flooring details, and exterior repair help for Sunnyvale homes.',
-      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/2022-03-27_08_50_18_View_northwest_along_California_State_Route_82_%28El_Camino_Real%29_between_Sunnyvale_Avenue_and_Murphy_Avenue_in_Sunnyvale%2C_Santa_Clara_County%2C_California.jpg?width=900',
-      alt: 'Street view near Murphy Avenue in Sunnyvale'
+      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Murphystreetsunnyvale.jpg?width=900',
+      alt: 'Murphy Street in downtown Sunnyvale'
     },
     {
       name: 'Foster City',
@@ -118,8 +118,8 @@ export class ServiceAreasComponent {
       name: 'Millbrae',
       label: 'Peninsula north',
       text: 'Exterior repairs, drywall and paint, flooring details, and everyday home fixes for Millbrae residents.',
-      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Millbrae%2C_CA%2C_USA_-_panoramio.jpg?width=900',
-      alt: 'Millbrae, California'
+      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Millbrae_station_from_Caltrain_platform%2C_May_2009.jpg?width=900',
+      alt: 'Millbrae station viewed from the Caltrain platform'
     }
   ];
 
@@ -132,4 +132,5 @@ export class ServiceAreasComponent {
 
     return this.areas.filter((area) => area.name.toLowerCase().includes(query) || area.label.toLowerCase().includes(query));
   }
+
 }

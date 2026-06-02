@@ -232,7 +232,30 @@ p {
 }
 
 @media (max-width: 640px) {
+  .section {
+    padding-bottom: 54px;
+    padding-top: 54px;
+  }
+
+  .section-heading {
+    margin-bottom: 36px;
+  }
+
+  .page-hero {
+    padding: 62px 24px 68px;
+  }
+
+  .about-hero,
+  .locations-hero,
+  .contact-hero,
+  .pricing-hero,
+  .work-hero {
+    min-height: auto;
+  }
+
   .page-hero h1 {
-    font-size: 2.45rem;
+    font-size: 2.15rem;
+    line-height: 1.05;
+    margin: 18px 0;
   }
 }

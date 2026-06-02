@@ -6,7 +6,11 @@
             <span>Insured Bay Area Handyman</span>
             <span>Property maintenance expert</span>
           </div>
-          <h1>Reliable Home Improvement Help in San Francisco, CA</h1>
+          <h1>
+            Reliable Home Improvement Help in
+            <span class="rotating-location" [class.visible]="locationVisible()" aria-hidden="true">{{ activeLocation() }}</span>
+            <span class="sr-only">San Francisco and nearby Bay Area communities</span>
+          </h1>
           <p>
             No stress, no mess. Just honest communication and quality work for your home.
           </p>
@@ -47,7 +51,7 @@
 
       <div class="card-grid">
         @for (service of services; track service.title) {
-          <article class="service-card">
+          <article #serviceCard class="service-card">
             <img [src]="service.image" [alt]="service.alt" />
             <div>
               <h3>{{ service.title }}</h3>
@@ -93,37 +97,20 @@
   </div>
 </section>
 
-<section class="section video-section">
-  <div class="video-copy">
-    <span class="eyebrow">Meet The Owners</span>
-    <h2>Get to Know the People Behind Renger Home Solutions</h2>
-    <p>
-      This owner introduction gives homeowners a clearer sense of the people they are inviting into their home,
-      the story behind the business, and why honest communication matters on every project.
-    </p>
-  </div>
-
-  <div class="video-frame">
-    <iframe
-      src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-      title="Renger Home Solutions team introduction video"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen
-    ></iframe>
-  </div>
-</section>
-
 <section class="section soft">
   <div class="pricing-preview">
     <div class="pricing-preview-copy">
       <span class="eyebrow">Starting Prices</span>
       <h2>Plan common home projects with clearer starting numbers.</h2>
       <p>Furniture assembly, TV mounting, caulking, and door repair have starting prices listed before you request service.</p>
-      <a class="secondary-action" routerLink="/pricing">View Service Pricing</a>
+      <a class="secondary-action pricing-cta" routerLink="/pricing">
+        View Service Pricing
+        <span aria-hidden="true">&rarr;</span>
+      </a>
     </div>
 
-    <div class="pricing-mini-grid">
-      @for (group of pricingPreview; track group.title) {
+    <div class="pricing-mini-grid" [class.visible]="pricingVisible()">
+      @for (group of pricingPreview(); track group.title) {
         <article class="pricing-mini-card">
           <span>{{ group.price }}</span>
           <h3>{{ group.title }}</h3>

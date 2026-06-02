@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, QueryList, ViewChildren, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { homeFaqs } from '../../data/faq-content';
@@ -11,7 +11,27 @@ import { FaqComponent } from '../../shared/faq/faq.component';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent implements AfterViewInit, OnDestroy {
+  @ViewChildren('serviceCard', { read: ElementRef })
+  serviceCards!: QueryList<ElementRef<HTMLElement>>;
+
+  locations = [
+    'San Francisco, CA',
+    'Millbrae',
+    'South San Francisco',
+    'Pacifica',
+    'San Mateo',
+    'Daly City'
+  ];
+  activeLocation = signal(this.locations[0]);
+  locationVisible = signal(true);
+  private locationIndex = 0;
+  private locationInterval?: ReturnType<typeof setInterval>;
+  private locationSwapTimer?: ReturnType<typeof setTimeout>;
+  private pricingInterval?: ReturnType<typeof setInterval>;
+  private pricingSwapTimer?: ReturnType<typeof setTimeout>;
+  private serviceCardObserver?: IntersectionObserver;
+
   faqs = homeFaqs;
 
   services = [
@@ -41,9 +61,102 @@ export class HomeComponent {
     }
   ];
 
-  pricingPreview = pricingGroups.map((group) => ({
-    title: group.title,
-    price: group.featuredPrice,
-    note: group.note
-  }));
+  pricingPreviewSlides = [
+    pricingGroups.map((group) => ({
+      title: group.title,
+      price: group.featuredPrice,
+      note: group.note
+    })),
+    [
+      { title: 'Adjustable Standing Desk', price: '$79.99', note: 'Furniture assembly' },
+      { title: 'Bed Frame', price: 'From $84.99', note: 'Furniture assembly' },
+      { title: 'Shelving System Installation', price: 'From $169', note: 'Furniture assembly' },
+      { title: 'Shower Caulking', price: 'From $219.99', note: 'Kitchen & bathroom' }
+    ],
+    [
+      { title: 'Bookcase', price: '$79', note: 'Furniture assembly' },
+      { title: 'Dresser, 8 Drawers', price: '$129', note: 'Furniture assembly' },
+      { title: 'Bathtub Caulking', price: 'From $199', note: 'Kitchen & bathroom' },
+      { title: 'Wire Concealment', price: 'From $49.99', note: 'TV mounting add-on' }
+    ]
+  ];
+  pricingPreview = signal(this.pricingPreviewSlides[0]);
+  pricingVisible = signal(true);
+  private pricingSlideIndex = 0;
+
+  constructor() {
+    if (
+      typeof window !== 'undefined' &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      this.locationInterval = setInterval(() => {
+        this.locationVisible.set(false);
+        this.locationSwapTimer = setTimeout(() => {
+          this.locationIndex = (this.locationIndex + 1) % this.locations.length;
+          this.activeLocation.set(this.locations[this.locationIndex]);
+          this.locationVisible.set(true);
+        }, 180);
+      }, 2800);
+
+      this.pricingInterval = setInterval(() => {
+        this.pricingVisible.set(false);
+        this.pricingSwapTimer = setTimeout(() => {
+          this.pricingSlideIndex = (this.pricingSlideIndex + 1) % this.pricingPreviewSlides.length;
+          this.pricingPreview.set(this.pricingPreviewSlides[this.pricingSlideIndex]);
+          this.pricingVisible.set(true);
+        }, 520);
+      }, 6200);
+    }
+  }
+
+  ngAfterViewInit() {
+    if (
+      typeof window === 'undefined' ||
+      !('IntersectionObserver' in window) ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      this.revealAllServiceCards();
+      return;
+    }
+
+    this.serviceCardObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.18 }
+    );
+
+    this.serviceCards.forEach((card) => this.serviceCardObserver?.observe(card.nativeElement));
+  }
+
+  ngOnDestroy() {
+    if (this.locationInterval) {
+      clearInterval(this.locationInterval);
+    }
+
+    if (this.locationSwapTimer) {
+      clearTimeout(this.locationSwapTimer);
+    }
+
+    if (this.pricingInterval) {
+      clearInterval(this.pricingInterval);
+    }
+
+    if (this.pricingSwapTimer) {
+      clearTimeout(this.pricingSwapTimer);
+    }
+
+    this.serviceCardObserver?.disconnect();
+  }
+
+  private revealAllServiceCards() {
+    this.serviceCards.forEach((card) => card.nativeElement.classList.add('revealed'));
+  }
 }

@@ -16,12 +16,12 @@
       </button>
 
       <nav id="main-menu" [class.open]="menuOpen()" aria-label="Main navigation">
-        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Home</a>
-        <a routerLink="/about" routerLinkActive="active" (click)="closeMenu()">About</a>
-        <a routerLink="/pricing" routerLinkActive="active" (click)="closeMenu()">Pricing</a>
-        <a routerLink="/service-areas" routerLinkActive="active" (click)="closeMenu()">Service Areas</a>
-        <a routerLink="/contact" routerLinkActive="active" (click)="closeMenu()">Contact</a>
-        <a routerLink="/work-with-us" routerLinkActive="active" (click)="closeMenu()">Work With Us</a>
+        <a href="/" [class.active]="isActive('/')" [class.selected]="selectedLink() === 'home'" (click)="navigateFromMenu($event, '/', 'home')">Home</a>
+        <a href="/about" [class.active]="isActive('/about')" [class.selected]="selectedLink() === 'about'" (click)="navigateFromMenu($event, '/about', 'about')">About</a>
+        <a href="/pricing" [class.active]="isActive('/pricing')" [class.selected]="selectedLink() === 'pricing'" (click)="navigateFromMenu($event, '/pricing', 'pricing')">Pricing</a>
+        <a href="/service-areas" [class.active]="isActive('/service-areas')" [class.selected]="selectedLink() === 'service-areas'" (click)="navigateFromMenu($event, '/service-areas', 'service-areas')">Service Areas</a>
+        <a href="/contact" [class.active]="isActive('/contact')" [class.selected]="selectedLink() === 'contact'" (click)="navigateFromMenu($event, '/contact', 'contact')">Contact</a>
+        <a href="/work-with-us" [class.active]="isActive('/work-with-us')" [class.selected]="selectedLink() === 'work-with-us'" (click)="navigateFromMenu($event, '/work-with-us', 'work-with-us')">Work With Us</a>
         <a class="mobile-call" href="tel:+14155550198" (click)="closeMenu()">Call Now</a>
       </nav>
 

@@ -48,6 +48,33 @@
   max-width: 840px;
 }
 
+.rotating-location {
+  color: #8bb1ff;
+  display: block;
+  min-height: 1.04em;
+  opacity: 0;
+  text-shadow: 0 0 22px rgba(83, 148, 255, 0.28);
+  transform: translateY(10px);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.rotating-location.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
 .hero p {
   color: #e4e9f6;
   font-size: 1.08rem;
@@ -123,12 +150,44 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    box-shadow 220ms ease,
+    opacity 420ms ease,
+    transform 420ms ease;
+}
+
+.service-card.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.service-card:nth-child(2) {
+  transition-delay: 80ms;
+}
+
+.service-card:nth-child(3) {
+  transition-delay: 160ms;
+}
+
+.service-card:nth-child(4) {
+  transition-delay: 240ms;
+}
+
+.service-card:hover {
+  box-shadow: 0 16px 30px rgba(28, 90, 190, 0.2);
 }
 
 .service-card img {
   aspect-ratio: 1.35;
   object-fit: cover;
+  transition: transform 320ms ease;
   width: 100%;
+}
+
+.service-card:hover img {
+  transform: scale(1.035);
 }
 
 .service-card div {
@@ -196,36 +255,6 @@
   transform: translateY(-1px);
 }
 
-.video-section {
-  align-items: center;
-  display: grid;
-  gap: clamp(36px, 5vw, 72px);
-  grid-template-columns: 0.75fr 1.25fr;
-  padding-top: 34px;
-}
-
-.video-copy {
-  max-width: 520px;
-}
-
-.video-copy h2 {
-  font-size: clamp(2rem, 3.6vw, 3rem);
-}
-
-.video-frame {
-  aspect-ratio: 16 / 9;
-  background: var(--navy);
-  border-radius: 8px;
-  box-shadow: var(--shadow);
-  overflow: hidden;
-}
-
-.video-frame iframe {
-  border: 0;
-  height: 100%;
-  width: 100%;
-}
-
 .pricing-preview {
   align-items: center;
   display: grid;
@@ -247,6 +276,14 @@
   display: grid;
   gap: 18px;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 520ms ease, transform 520ms ease;
+}
+
+.pricing-mini-grid.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .pricing-mini-card {
@@ -256,6 +293,37 @@
   box-shadow: 0 10px 24px rgba(12, 20, 40, 0.08);
   min-height: 168px;
   padding: 24px;
+}
+
+.pricing-cta {
+  animation: pricing-cta-pulse 5.2s ease-in-out infinite;
+  gap: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.pricing-cta span {
+  display: inline-block;
+  font-size: 1.22rem;
+  line-height: 1;
+  transition: transform 180ms ease;
+}
+
+.pricing-cta:hover span,
+.pricing-cta:focus-visible span {
+  transform: translateX(4px);
+}
+
+@keyframes pricing-cta-pulse {
+  0%,
+  76%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(47, 125, 246, 0);
+  }
+
+  84% {
+    box-shadow: 0 0 0 7px rgba(47, 125, 246, 0.16);
+  }
 }
 
 .pricing-mini-card span {
@@ -330,10 +398,6 @@
     grid-template-columns: 1fr;
   }
 
-  .video-section {
-    grid-template-columns: 1fr;
-  }
-
   .crew-copy {
     order: 1;
   }
@@ -345,7 +409,13 @@
 
 @media (max-width: 640px) {
   .hero h1 {
-    font-size: 2.45rem;
+    font-size: 2.15rem;
+    line-height: 1.06;
+    margin: 20px 0;
+  }
+
+  .rotating-location {
+    min-height: 2.12em;
   }
 
   .hero,
@@ -355,8 +425,26 @@
 
   .hero-content {
     gap: 28px;
-    padding-bottom: 54px;
-    padding-top: 54px;
+    padding-bottom: 44px;
+    padding-top: 44px;
+  }
+
+  .trust-row,
+  .pill-row {
+    gap: 9px 12px;
+  }
+
+  .trust-row span {
+    font-size: 0.74rem;
+  }
+
+  .pill-row span {
+    font-size: 0.78rem;
+    padding: 9px 12px;
+  }
+
+  .estimate-card {
+    padding: 24px;
   }
 
   .choice-grid,
@@ -369,5 +457,25 @@
     align-items: flex-start;
     flex-direction: column;
     gap: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rotating-location {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .service-card,
+  .service-card img,
+  .pricing-mini-grid {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .pricing-cta {
+    animation: none;
   }
 }
