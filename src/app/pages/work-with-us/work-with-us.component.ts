@@ -37,7 +37,7 @@ export class WorkWithUsComponent {
     experience: ''
   };
 
-  async submit() {
+  submit() {
     if (this.submitting) {
       return;
     }
@@ -62,20 +62,18 @@ export class WorkWithUsComponent {
         _captcha: 'false'
       });
 
-      window.setTimeout(() => {
-        this.submitted = true;
-        this.formStatus = 'Thanks. Your application was sent to Renger Home Solutions.';
-        this.form = {
-          firstName: '',
-          lastName: '',
-          email: '',
-          phone: '',
-          specialty: '',
-          yearsExperience: '',
-          experience: ''
-        };
-        this.submitting = false;
-      }, 650);
+      this.submitted = true;
+      this.formStatus = 'Thanks. Your application was sent to Renger Home Solutions.';
+      this.form = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        specialty: '',
+        yearsExperience: '',
+        experience: ''
+      };
+      this.submitting = false;
     } catch (error) {
       this.formError = true;
       this.formStatus = 'Sorry, the application could not be sent. Please call or email Renger Home Solutions directly.';

@@ -50,7 +50,7 @@ export class ContactComponent {
     });
   }
 
-  async submit() {
+  submit() {
     if (this.submitting) {
       return;
     }
@@ -74,20 +74,18 @@ export class ContactComponent {
         _captcha: 'false',
       });
 
-      window.setTimeout(() => {
-        this.submitted = true;
-        this.formStatus =
-          'Thank you for sending us a message. We will get back to you as soon as possible.';
-        this.form = {
-          firstName: '',
-          lastName: '',
-          email: '',
-          phone: '',
-          budget: '',
-          message: '',
-        };
-        this.submitting = false;
-      }, 650);
+      this.submitted = true;
+      this.formStatus =
+        'Thank you for sending us a message. We will get back to you as soon as possible.';
+      this.form = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        budget: '',
+        message: '',
+      };
+      this.submitting = false;
     } catch (error) {
       this.formError = true;
       this.formStatus =
