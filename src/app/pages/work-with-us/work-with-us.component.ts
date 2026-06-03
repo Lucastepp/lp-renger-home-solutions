@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
+const formDestination = 'https://formsubmit.co/ajax/hello@rengerhomesolutions.com';
+
 @Component({
   selector: 'app-work-with-us',
   imports: [FormsModule, RouterLink],
@@ -35,18 +37,28 @@ export class WorkWithUsComponent {
     this.formStatus = '';
 
     try {
-      const response = await fetch('/api/forms', {
+      const name = `${this.form.firstName} ${this.form.lastName}`.trim();
+      const response = await fetch(formDestination, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
-          type: 'application',
-          ...this.form
+          name,
+          email: this.form.email,
+          phone: this.form.phone || 'Not provided',
+          specialty: this.form.specialty,
+          yearsExperience: this.form.yearsExperience,
+          experience: this.form.experience,
+          _subject: `New work application from ${name || 'Renger website'}`,
+          _template: 'table',
+          _captcha: 'false'
         })
       });
 
       if (!response.ok) {
-        const result = await response.json().catch(() => ({}));
-        throw new Error(result.error || 'The form could not be sent.');
+        throw new Error('The form could not be sent.');
       }
 
       this.submitted = true;

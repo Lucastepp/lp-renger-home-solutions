@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { contactFaqs } from '../../data/faq-content';
 import { FaqComponent } from '../../shared/faq/faq.component';
 
+const formDestination = 'https://formsubmit.co/ajax/hello@rengerhomesolutions.com';
+
 @Component({
   selector: 'app-contact',
   imports: [FaqComponent, FormsModule],
@@ -48,18 +50,27 @@ export class ContactComponent {
     this.formStatus = '';
 
     try {
-      const response = await fetch('/api/forms', {
+      const name = `${this.form.firstName} ${this.form.lastName}`.trim();
+      const response = await fetch(formDestination, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({
-          type: 'estimate',
-          ...this.form,
+          name,
+          email: this.form.email,
+          phone: this.form.phone || 'Not provided',
+          budget: this.form.budget || 'Not provided',
+          message: this.form.message,
+          _subject: `New estimate request from ${name || 'Renger website'}`,
+          _template: 'table',
+          _captcha: 'false',
         }),
       });
 
       if (!response.ok) {
-        const result = await response.json().catch(() => ({}));
-        throw new Error(result.error || 'The form could not be sent.');
+        throw new Error('The form could not be sent.');
       }
 
       this.submitted = true;
