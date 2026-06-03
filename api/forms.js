@@ -5,6 +5,10 @@ function readBody(req) {
     return Promise.resolve(req.body);
   }
 
+  if (req.body && typeof req.body === 'string') {
+    return Promise.resolve(JSON.parse(req.body));
+  }
+
   return new Promise((resolve, reject) => {
     let raw = '';
 
@@ -114,11 +118,14 @@ module.exports = async function handler(req, res) {
       ? formatApplication(payload)
       : formatEstimate(payload);
 
+    const siteOrigin = req.headers.origin || 'https://www.rengerhomesolutions.com';
     const response = await fetch(`https://formsubmit.co/ajax/${destinationEmail}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json'
+        Accept: 'application/json',
+        Origin: siteOrigin,
+        Referer: `${siteOrigin}/contact`
       },
       body: JSON.stringify({
         name: formatted.name || 'Renger website visitor',
@@ -133,6 +140,16 @@ module.exports = async function handler(req, res) {
     const result = await response.json().catch(() => ({}));
 
     if (!response.ok) {
+      return res.status(502).json({
+        error: result.message || 'The email service could not send the form.'
+      });
+    }
+
+    if (result.success === 'false' && /activation/i.test(result.message || '')) {
+      return res.status(202).json({ ok: true, activationRequired: true });
+    }
+
+    if (result.success === 'false') {
       return res.status(502).json({
         error: result.message || 'The email service could not send the form.'
       });

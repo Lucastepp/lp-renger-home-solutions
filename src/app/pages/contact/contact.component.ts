@@ -63,7 +63,7 @@ export class ContactComponent {
       }
 
       this.submitted = true;
-      this.formStatus = 'Thanks. Your request was sent to Renger Home Solutions.';
+      this.formStatus = 'Obrigado por nos enviar uma mensagem. Responderemos o mais rápido possível.';
       this.form = {
         firstName: '',
         lastName: '',
