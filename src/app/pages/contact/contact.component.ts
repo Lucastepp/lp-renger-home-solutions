@@ -6,7 +6,7 @@ import { contactFaqs } from '../../data/faq-content';
 import { FaqComponent } from '../../shared/faq/faq.component';
 
 const formDestination = 'https://formsubmit.co/ajax/hello@rengerhomesolutions.com';
-const formTimeoutMs = 10000;
+const formTimeoutMs = 8000;
 const minimumLoadingMs = 900;
 
 function wait(milliseconds: number) {
@@ -15,22 +15,32 @@ function wait(milliseconds: number) {
 
 async function sendForm(payload: Record<string, string>) {
   const controller = new AbortController();
-  const timeoutId = window.setTimeout(() => controller.abort(), formTimeoutMs);
+  let timeoutId = 0;
 
   try {
-    const response = await fetch(formDestination, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-      signal: controller.signal,
+    const request = fetch(formDestination, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+        signal: controller.signal,
+      })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('The form could not be sent.');
+        }
+      });
+
+    const timeout = new Promise<void>((_, reject) => {
+      timeoutId = window.setTimeout(() => {
+        controller.abort();
+        reject(new Error('The form confirmation timed out.'));
+      }, formTimeoutMs);
     });
 
-    if (!response.ok) {
-      throw new Error('The form could not be sent.');
-    }
+    await Promise.race([request, timeout]);
   } finally {
     window.clearTimeout(timeoutId);
   }
