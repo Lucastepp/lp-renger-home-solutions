@@ -16,20 +16,25 @@ function wait(milliseconds: number) {
 async function sendForm(payload: Record<string, string>) {
   const controller = new AbortController();
   let timeoutId = 0;
+  const formData = new URLSearchParams(payload);
 
   try {
     const request = fetch(formDestination, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
-          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(payload),
+        body: formData,
         signal: controller.signal,
       })
-      .then((response) => {
+      .then(async (response) => {
         if (!response.ok) {
           throw new Error('The form could not be sent.');
+        }
+
+        const data = await response.json().catch(() => null);
+        if (data?.success === false || data?.success === 'false') {
+          throw new Error(data?.message || 'The form could not be sent.');
         }
       });
 
