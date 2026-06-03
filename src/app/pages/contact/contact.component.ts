@@ -6,30 +6,16 @@ import { contactFaqs } from '../../data/faq-content';
 import { FaqComponent } from '../../shared/faq/faq.component';
 
 const formDestination = 'https://formsubmit.co/ajax/hello@rengerhomesolutions.com';
-const formUiTimeoutMs = 3500;
 
 function sendForm(payload: Record<string, string>) {
-  const request = fetch(formDestination, {
+  fetch(formDestination, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(payload),
-  });
-
-  request.catch((error) => console.warn('FormSubmit request failed', error));
-
-  return Promise.race([
-    request.then((response) => {
-      if (!response.ok) {
-        throw new Error('The form could not be sent.');
-      }
-    }),
-    new Promise<void>((resolve) => {
-      window.setTimeout(resolve, formUiTimeoutMs);
-    }),
-  ]);
+  }).catch((error) => console.warn('FormSubmit request failed', error));
 }
 
 @Component({
@@ -76,8 +62,8 @@ export class ContactComponent {
 
     try {
       const name = `${this.form.firstName} ${this.form.lastName}`.trim();
-      await sendForm({
-        formType: 'Client estimate request',
+      sendForm({
+        'Form type': 'Client estimate request',
         name,
         email: this.form.email,
         phone: this.form.phone || 'Not provided',
@@ -88,25 +74,24 @@ export class ContactComponent {
         _captcha: 'false',
       });
 
-      this.submitted = true;
-      this.formStatus = `Thank you very much for contacting Renger Home Solutions.
-
-            We truly appreciate your message and your interest in our services. Our team will review your request and get back to you as soon as possible.
-
-            We look forward to speaking with you.`;
-      this.form = {
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        budget: '',
-        message: '',
-      };
+      window.setTimeout(() => {
+        this.submitted = true;
+        this.formStatus =
+          'Thank you for sending us a message. We will get back to you as soon as possible.';
+        this.form = {
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          budget: '',
+          message: '',
+        };
+        this.submitting = false;
+      }, 650);
     } catch (error) {
       this.formError = true;
       this.formStatus =
         'Sorry, the form could not be sent. Please call or email Renger Home Solutions directly.';
-    } finally {
       this.submitting = false;
     }
   }
