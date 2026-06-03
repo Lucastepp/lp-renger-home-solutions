@@ -52,9 +52,11 @@
       Tell us about your skills, availability, tools, transportation, and recent work.
       <textarea name="experience" [(ngModel)]="form.experience" maxlength="700" required></textarea>
     </label>
-    <button type="submit" [disabled]="workForm.invalid">Submit Application</button>
-    @if (submitted) {
-      <p class="form-status">Thanks. This demo captured the application. Connect a form service or API endpoint to send real emails.</p>
+    <button type="submit" [disabled]="workForm.invalid || submitting">
+      {{ submitting ? 'Sending...' : 'Submit Application' }}
+    </button>
+    @if (formStatus) {
+      <p class="form-status" [class.error]="formError">{{ formStatus }}</p>
     }
   </form>
 </section>

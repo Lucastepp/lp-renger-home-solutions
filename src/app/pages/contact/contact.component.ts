@@ -13,6 +13,9 @@ import { FaqComponent } from '../../shared/faq/faq.component';
 })
 export class ContactComponent {
   submitted = false;
+  submitting = false;
+  formStatus = '';
+  formError = false;
   faqs = contactFaqs;
 
   form = {
@@ -34,7 +37,46 @@ export class ContactComponent {
     });
   }
 
-  submit() {
-    this.submitted = true;
+  async submit() {
+    if (this.submitting) {
+      return;
+    }
+
+    this.submitting = true;
+    this.submitted = false;
+    this.formError = false;
+    this.formStatus = '';
+
+    try {
+      const response = await fetch('/api/forms', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'estimate',
+          ...this.form
+        })
+      });
+
+      if (!response.ok) {
+        const result = await response.json().catch(() => ({}));
+        throw new Error(result.error || 'The form could not be sent.');
+      }
+
+      this.submitted = true;
+      this.formStatus = 'Thanks. Your request was sent to Renger Home Solutions.';
+      this.form = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        budget: '',
+        message: ''
+      };
+    } catch (error) {
+      this.formError = true;
+      this.formStatus = 'Sorry, the form could not be sent. Please call or email Renger Home Solutions directly.';
+    } finally {
+      this.submitting = false;
+    }
   }
 }

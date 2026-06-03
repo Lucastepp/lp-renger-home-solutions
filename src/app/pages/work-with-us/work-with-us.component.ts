@@ -10,6 +10,9 @@ import { RouterLink } from '@angular/router';
 })
 export class WorkWithUsComponent {
   submitted = false;
+  submitting = false;
+  formStatus = '';
+  formError = false;
 
   form = {
     firstName: '',
@@ -21,7 +24,47 @@ export class WorkWithUsComponent {
     experience: ''
   };
 
-  submit() {
-    this.submitted = true;
+  async submit() {
+    if (this.submitting) {
+      return;
+    }
+
+    this.submitting = true;
+    this.submitted = false;
+    this.formError = false;
+    this.formStatus = '';
+
+    try {
+      const response = await fetch('/api/forms', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'application',
+          ...this.form
+        })
+      });
+
+      if (!response.ok) {
+        const result = await response.json().catch(() => ({}));
+        throw new Error(result.error || 'The form could not be sent.');
+      }
+
+      this.submitted = true;
+      this.formStatus = 'Thanks. Your application was sent to Renger Home Solutions.';
+      this.form = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        specialty: '',
+        yearsExperience: '',
+        experience: ''
+      };
+    } catch (error) {
+      this.formError = true;
+      this.formStatus = 'Sorry, the application could not be sent. Please call or email Renger Home Solutions directly.';
+    } finally {
+      this.submitting = false;
+    }
   }
 }
