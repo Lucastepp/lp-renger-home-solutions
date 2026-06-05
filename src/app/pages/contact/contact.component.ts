@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import { contactFaqs } from '../../data/faq-content';
+import { SeoService } from '../../services/seo.service';
 import { FaqComponent } from '../../shared/faq/faq.component';
 
 const formDestination = 'https://formsubmit.co/ajax/hello@rengerhomesolutions.com';
@@ -24,7 +25,8 @@ function sendForm(payload: Record<string, string>) {
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss',
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit {
+  private seo = inject(SeoService);
   submitted = false;
   submitting = false;
   formStatus = '';
@@ -39,6 +41,14 @@ export class ContactComponent {
     budget: '',
     message: '',
   };
+
+  ngOnInit() {
+    this.seo.set({
+      title: 'Get a Free Estimate | Contact Renger Home Solutions',
+      description: 'Request a free home improvement estimate from Renger Home Solutions. Call (650) 418-9524 or send a message online. Serving San Francisco and the Bay Area.',
+      path: '/contact',
+    });
+  }
 
   constructor(private route: ActivatedRoute) {
     this.route.queryParamMap.subscribe((params) => {

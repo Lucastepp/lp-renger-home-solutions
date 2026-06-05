@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, QueryList, ViewChildren, signal } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { homeFaqs } from '../../data/faq-content';
 import { pricingGroups } from '../../data/pricing-content';
+import { SeoService } from '../../services/seo.service';
 import { FaqComponent } from '../../shared/faq/faq.component';
 
 @Component({
@@ -11,7 +12,8 @@ import { FaqComponent } from '../../shared/faq/faq.component';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements AfterViewInit, OnDestroy {
+export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
+  private seo = inject(SeoService);
   @ViewChildren('serviceCard', { read: ElementRef })
   serviceCards!: QueryList<ElementRef<HTMLElement>>;
 
@@ -117,6 +119,14 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
         }, 420);
       }, 7200);
     }
+  }
+
+  ngOnInit() {
+    this.seo.set({
+      title: 'Renger Home Solutions | Bay Area Handyman Services',
+      description: 'Fully insured handyman services in San Francisco and the Bay Area. Fast free estimates for home repairs, drywall, painting, flooring, and property maintenance. Call (650) 418-9524.',
+      path: '',
+    });
   }
 
   ngAfterViewInit() {
