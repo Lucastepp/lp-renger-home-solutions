@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
 import { serviceAreaFaqs } from '../../data/faq-content';
+import { SeoService } from '../../services/seo.service';
 import { FaqComponent } from '../../shared/faq/faq.component';
 
 @Component({
@@ -11,9 +12,19 @@ import { FaqComponent } from '../../shared/faq/faq.component';
   templateUrl: './service-areas.component.html',
   styleUrl: './service-areas.component.scss'
 })
-export class ServiceAreasComponent {
+export class ServiceAreasComponent implements OnInit {
+  private seo = inject(SeoService);
   faqs = serviceAreaFaqs;
   searchTerm = '';
+
+  ngOnInit() {
+    this.seo.set({
+      title: 'Handyman Service Areas | San Francisco, Peninsula & Bay Area',
+      description: 'Renger Home Solutions serves San Francisco, Daly City, Pacifica, San Mateo, Burlingame, Palo Alto, Mountain View, Sunnyvale, and 15+ Bay Area communities. Request service in your city.',
+      path: '/service-areas',
+      image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80',
+    });
+  }
 
   areas = [
     {

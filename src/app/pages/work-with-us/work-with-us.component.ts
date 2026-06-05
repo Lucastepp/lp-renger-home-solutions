@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+
+import { SeoService } from '../../services/seo.service';
 
 const formDestination = 'https://formsubmit.co/ajax/hello@rengerhomesolutions.com';
 
@@ -21,9 +23,18 @@ function sendForm(payload: Record<string, string>) {
   templateUrl: './work-with-us.component.html',
   styleUrl: './work-with-us.component.scss'
 })
-export class WorkWithUsComponent {
+export class WorkWithUsComponent implements OnInit {
+  private seo = inject(SeoService);
   submitted = false;
   submitting = false;
+
+  ngOnInit() {
+    this.seo.set({
+      title: 'Work With Us | Join the Renger Home Solutions Team',
+      description: 'Join the Renger Home Solutions team in the Bay Area. We are looking for experienced handymen and tradespeople. Tell us your specialty, experience, and availability.',
+      path: '/work-with-us',
+    });
+  }
   formStatus = '';
   formError = false;
 
