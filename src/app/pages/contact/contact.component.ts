@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
@@ -6,17 +6,37 @@ import { contactFaqs } from '../../data/faq-content';
 import { SeoService } from '../../services/seo.service';
 import { FaqComponent } from '../../shared/faq/faq.component';
 
-const formDestination = 'https://formsubmit.co/ajax/hello@rengerhomesolutions.com';
+const formDestination = '/api/forms';
+const formTimeoutMs = 10000;
 
-function sendForm(payload: Record<string, string>) {
-  fetch(formDestination, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(payload),
-  }).catch((error) => console.warn('FormSubmit request failed', error));
+function withTimeout<T>(request: Promise<T>) {
+  return new Promise<T>((resolve, reject) => {
+    const timeoutId = window.setTimeout(() => {
+      reject(new Error('The form request timed out.'));
+    }, formTimeoutMs);
+
+    request
+      .then(resolve)
+      .catch(reject)
+      .finally(() => window.clearTimeout(timeoutId));
+  });
+}
+
+async function sendForm(payload: Record<string, string>) {
+  const response = await withTimeout(
+    fetch(formDestination, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+  );
+
+  if (!response.ok) {
+    throw new Error('The form could not be sent.');
+  }
 }
 
 @Component({
@@ -27,6 +47,7 @@ function sendForm(payload: Record<string, string>) {
 })
 export class ContactComponent implements OnInit {
   private seo = inject(SeoService);
+  private changeDetector = inject(ChangeDetectorRef);
   submitted = false;
   submitting = false;
   formStatus = '';
@@ -60,7 +81,7 @@ export class ContactComponent implements OnInit {
     });
   }
 
-  submit() {
+  async submit() {
     if (this.submitting) {
       return;
     }
@@ -72,8 +93,8 @@ export class ContactComponent implements OnInit {
 
     try {
       const name = `${this.form.firstName} ${this.form.lastName}`.trim();
-      sendForm({
-        'Form type': 'Client estimate request',
+      await sendForm({
+        type: 'estimate',
         name,
         email: this.form.email,
         phone: this.form.phone || 'Not provided',
@@ -96,11 +117,13 @@ export class ContactComponent implements OnInit {
         message: '',
       };
       this.submitting = false;
+      this.changeDetector.detectChanges();
     } catch (error) {
       this.formError = true;
       this.formStatus =
         'Sorry, the form could not be sent. Please call or email Renger Home Solutions directly.';
       this.submitting = false;
+      this.changeDetector.detectChanges();
     }
   }
 }
