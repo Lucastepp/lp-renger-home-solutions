@@ -15,6 +15,7 @@
 
 .site-header {
   align-items: center;
+  overflow: hidden;
   background:
     linear-gradient(
       105deg,
@@ -37,6 +38,32 @@
   position: sticky;
   top: 36px;
   z-index: 29;
+}
+
+.site-header::after {
+  animation: header-shine 11s ease-in-out infinite;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.07) 46%,
+    rgba(255, 255, 255, 0.18) 50%,
+    rgba(255, 255, 255, 0.07) 54%,
+    transparent 70%
+  );
+  content: '';
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+}
+
+@keyframes header-shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  38%, 100% {
+    transform: translateX(100%);
+  }
 }
 
 .brand {
@@ -144,6 +171,7 @@ nav a.selected {
     background: rgba(13, 16, 32, 0.97);
     gap: 18px;
     min-height: 72px;
+    overflow: visible;
     padding: 12px 24px;
   }
 
@@ -247,6 +275,23 @@ nav a.selected {
   .mobile-call {
     display: inline-flex;
     margin-top: 14px;
+  }
+
+  .site-header::after {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-header::after {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header::after {
+    animation: none;
+    display: none;
   }
 }
 
