@@ -38,7 +38,7 @@ export class ServiceAreasComponent implements OnInit {
       name: 'Daly City',
       label: 'Peninsula north',
       text: 'Practical home improvement support for Daly City homeowners, from small repairs to larger residential upgrades.',
-      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Fog_over_Daly_City%2C_September_2018.JPG?width=900',
+      image: '/assets/service-areas/daly-city.jpeg',
       alt: 'Fog over a residential neighborhood in Daly City'
     },
     {
@@ -52,28 +52,28 @@ export class ServiceAreasComponent implements OnInit {
       name: 'South San Francisco',
       label: 'Peninsula access',
       text: 'Flexible scheduling for home repairs, exterior fixes, and improvement projects in South San Francisco.',
-      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Sign_Hill_Park%2C_South_San_Francisco%2C_California_%287527962822%29.jpg?width=900',
+      image: '/assets/service-areas/south-san-francisco.jpg',
       alt: 'South San Francisco hillside sign'
     },
     {
       name: 'San Bruno',
       label: 'Peninsula north',
       text: 'Small-to-medium repairs, drywall, paint, assembly, and property maintenance for San Bruno homes.',
-      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/SanBruno.jpg?width=900',
-      alt: 'Panorama of San Bruno looking toward San Francisco Bay'
+      image: '/assets/service-areas/san-bruno.jpg',
+      alt: 'San Bruno City Park'
     },
     {
       name: 'Burlingame',
       label: 'Peninsula',
       text: 'Kitchen and bath updates, finish repairs, flooring details, and maintenance support in Burlingame.',
-      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Burlingame_caltrain_station.JPG?width=900',
+      image: '/assets/service-areas/burlingame.jpeg',
       alt: 'Burlingame Caltrain station'
     },
     {
       name: 'San Mateo',
       label: 'Mid-Peninsula',
       text: 'Drywall, painting, flooring, exterior repairs, and home repair help for San Mateo and nearby Peninsula homes.',
-      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Downtown_San_Mateo%2C_California_%2825571394628%29.jpg?width=900',
+      image: '/assets/service-areas/san-mateo.jpeg',
       alt: 'Downtown San Mateo'
     },
     {
@@ -87,7 +87,7 @@ export class ServiceAreasComponent implements OnInit {
       name: 'Redwood City',
       label: 'Mid-Peninsula',
       text: 'Home repair help for Redwood City properties, including finish work, caulking, assembly, paint, and maintenance.',
-      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Redwood_City%2C_California_Downtown_residences.jpg?width=900',
+      image: '/assets/service-areas/redwood-city.jpg',
       alt: 'Downtown residences in Redwood City'
     },
     {
@@ -101,8 +101,8 @@ export class ServiceAreasComponent implements OnInit {
       name: 'Palo Alto',
       label: 'South Peninsula',
       text: 'Handyman support, drywall and paint repairs, fixture updates, and property maintenance in Palo Alto.',
-      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Downtown_Palo_Alto_Library.jpg?width=900',
-      alt: 'Downtown Palo Alto Library'
+      image: '/assets/service-areas/palo-alto.jpg',
+      alt: 'Palo Alto street scene'
     },
     {
       name: 'Mountain View',
@@ -115,14 +115,14 @@ export class ServiceAreasComponent implements OnInit {
       name: 'Sunnyvale',
       label: 'South Bay access',
       text: 'Practical home fixes, drywall repairs, flooring details, and exterior repair help for Sunnyvale homes.',
-      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Murphystreetsunnyvale.jpg?width=900',
+      image: '/assets/service-areas/sunnyvale.jpg',
       alt: 'Murphy Street in downtown Sunnyvale'
     },
     {
       name: 'Foster City',
       label: 'Peninsula waterfront',
       text: 'Property maintenance, caulking, door repairs, fixture updates, and punch-list support in Foster City.',
-      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Foster_City_Lagoon_1_2020-08-11.jpeg?width=900',
+      image: '/assets/service-areas/foster-city.jpg',
       alt: 'Foster City Lagoon'
     },
     {
