@@ -256,6 +256,11 @@
   width: 100%;
 }
 
+.service-card img.service-card-image--zoom-out {
+  object-fit: cover;
+  object-position: center;
+}
+
 .service-card:hover img {
   transform: scale(1.035);
 }

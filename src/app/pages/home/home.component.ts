@@ -53,14 +53,16 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     {
       title: 'Drywall & Paint',
       text: 'Drywall installation, ceiling repairs, water damage reconstruction, taping, mudding, texture matching, and paint touch-ups.',
-      image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=900&q=80',
-      alt: 'Home painting and drywall renovation tools'
+      image: '/assets/services/drywall-paint.jpg',
+      alt: 'Worker installing drywall inside a home',
+      zoomOutImage: true
     },
     {
       title: 'Flooring',
       text: 'Flooring repairs, finish details, baseboards, transitions, and small-to-medium updates that make rooms feel complete.',
-      image: 'https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&w=900&q=80',
-      alt: 'Flooring installation detail in a bright home'
+      image: '/assets/services/flooring.jpg',
+      alt: 'Hands measuring flooring during installation',
+      zoomOutImage: true
     }
   ];
 

@@ -57,7 +57,7 @@
       <div class="card-grid">
         @for (service of services; track service.title) {
           <article #serviceCard class="service-card">
-            <img [src]="service.image" [alt]="service.alt" />
+            <img [src]="service.image" [alt]="service.alt" [class.service-card-image--zoom-out]="service.zoomOutImage" />
             <div>
               <h3>{{ service.title }}</h3>
               <p>{{ service.text }}</p>
